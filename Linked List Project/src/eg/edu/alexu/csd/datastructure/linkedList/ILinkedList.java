@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.datastructure.linkedList;
 
-public interface ILinkedListSingle {
+public interface ILinkedList {
 	/**
 	 * Inserts a specified element at the specified sposition in the list.
 	 */
@@ -34,7 +34,7 @@ public interface ILinkedListSingle {
 	 * Returns a view of the portion of this list between the specified
 	 * fromIndex and toIndex, inclusively.
 	 */
-	public ILinkedListSingle sublist(int fromIndex, int toIndex);
+	public ILinkedList sublist(int fromIndex, int toIndex);
 
 	/**
 	 * Returns true if this list contains an element with the same value as the
