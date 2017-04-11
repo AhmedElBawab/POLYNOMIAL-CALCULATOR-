@@ -1,8 +1,8 @@
-package eg.edu.alexu.csd.datastructure.linkedList.cs08;
+package eg.edu.alexu.csd.datastructure.linkedList.cs24_08;
 
-import eg.edu.alexu.csd.datastructure.linkedList.ILinkedListSingle;
+import eg.edu.alexu.csd.datastructure.linkedList.ILinkedList;
 
-public class singleLinkedList implements ILinkedListSingle {
+public class singleLinkedList implements ILinkedList {
 
 	SingleListNode head = null;
 
@@ -127,9 +127,9 @@ public class singleLinkedList implements ILinkedListSingle {
 	}
 
 	@Override
-	public ILinkedListSingle sublist(int fromIndex, int toIndex) {
+	public ILinkedList sublist(int fromIndex, int toIndex) {
 		// TODO Auto-generated method stub
-		ILinkedListSingle subListObject = new singleLinkedList();
+		ILinkedList subListObject = new singleLinkedList();
 		SingleListNode i = this.head ;
 		for(int counter = 0 ;counter<fromIndex ; counter++){
 			i = i.next ;

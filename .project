@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>Linked List Project</name>
+=======
+	<name>linked-list-project</name>
+>>>>>>> branch 'master' of https://ahmed_elbawab@bitbucket.org/ahmed_elbawab/linked-list-project.git
 	<comment></comment>
 	<projects>
 	</projects>

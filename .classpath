@@ -2,6 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="Linked List Project/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="Linked List Project/bin"/>
+=======
+	<classpathentry kind="output" path="bin"/>
+>>>>>>> branch 'master' of https://ahmed_elbawab@bitbucket.org/ahmed_elbawab/linked-list-project.git
 </classpath>

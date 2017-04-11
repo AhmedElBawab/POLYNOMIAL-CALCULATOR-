@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.datastructure.linkedList.cs08;
+package eg.edu.alexu.csd.datastructure.linkedList.cs24_08;
 
 import static org.junit.Assert.*;
 
