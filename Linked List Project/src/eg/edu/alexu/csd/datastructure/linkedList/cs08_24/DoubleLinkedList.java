@@ -117,7 +117,7 @@ public class DoubleLinkedList implements ILinkedList {
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		if(head == null){
+		if(head.next == null){
 			return true;
 		}
 		return false;
@@ -190,18 +190,21 @@ public class DoubleLinkedList implements ILinkedList {
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
 
-		doubleListNode i = head;
 		
+		doubleListNode i = head;
+
 		while(i != null){
 			if(i.value == o){
+				
 				return true;
 				
 			}
 			i = i.next;
 		}
 		
-	
+
 		return false;
+	
 	}
 
 }
