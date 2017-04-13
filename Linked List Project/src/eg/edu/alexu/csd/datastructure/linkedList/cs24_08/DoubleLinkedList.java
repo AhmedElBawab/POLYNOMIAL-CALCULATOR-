@@ -9,33 +9,25 @@ public class DoubleLinkedList implements ILinkedList {
 	@Override
 	public void add(int index, Object element) {
 		// TODO Auto-generated method stub
-
+		if (index < 0 || index > size() || element == null){
+			throw null;
+		}
 		doubleListNode newNode = new doubleListNode();
 		doubleListNode i = head;
+		doubleListNode k = null;
 		newNode.value = element;
 		if (index == 0) {
-
-			head = newNode;
+			newNode.next = this.head ;
+			this.head = newNode ;
 		} else {
 			for (int j = 0; j < index - 1; j++) {
 				i = i.next;
+				k = i.next;
 			}
-			if (i.next == null) {
-				if (tail != null) {
-					tail.next = newNode;
-					newNode.pre = tail;
-					tail = newNode;
-				} else {
-					head.next = newNode;
-					newNode.pre = head;
-					tail = newNode;
-				}
-			} else {
-				newNode.next = i.next;
-				i.next.pre = newNode;
-				newNode.pre = i;
-				i.next = newNode;
-			}
+			newNode.next = i.next;
+			newNode.pre = i;
+			i.next = newNode;
+			k.pre = newNode;
 		}
 
 	}
@@ -43,26 +35,21 @@ public class DoubleLinkedList implements ILinkedList {
 	@Override
 	public void add(Object element) {
 		// TODO Auto-generated method stub
-
-		doubleListNode newNode = new doubleListNode();
-
-		newNode.value = element;
-
-		doubleListNode i = head;
-
-		while (i.next != null) {
-			i = i.next;
+		if (element == null){
+			throw null;
 		}
-
-		if (tail != null) {
-			tail = i;
-			tail.next = newNode;
-			newNode.pre = tail;
-			tail = newNode;
-		} else {
-			tail = newNode;
-			head.next = newNode;
-			newNode.pre = head;
+		doubleListNode newNode = new doubleListNode();
+		newNode.value = element;
+		doubleListNode i = head;
+		if(this.head==null){
+			newNode.next = this.head ;
+			this.head = newNode;
+		}else{
+			while (i.next != null) {
+				i = i.next;
+			}
+			i.next = newNode.next;
+			newNode.pre = i;
 		}
 	}
 
