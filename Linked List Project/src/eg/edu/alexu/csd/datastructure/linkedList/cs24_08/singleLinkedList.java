@@ -9,6 +9,9 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public void add(int index, Object element) {
 		// TODO Auto-generated method stub
+		if (index < 0 || index > size() || element == null){
+			throw null;
+		}
 		SingleListNode newNode = new SingleListNode();// New node which will be
 														// insert in index
 		newNode.value = element;// set the value to new node
