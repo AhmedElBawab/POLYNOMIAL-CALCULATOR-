@@ -84,6 +84,7 @@ public class App implements IPolynomialSolver {
 						string.append('x');
 						string.append('^');
 						string.append(c);
+						string.append('+');
 					}
 					else{
 					    string.append(tailA.value);	
@@ -111,6 +112,7 @@ public class App implements IPolynomialSolver {
 						string.append('x');
 						string.append('^');
 						string.append(c);
+						string.append('+');
 					}
 					else{
 					    string.append(tailB.value);	
@@ -138,6 +140,7 @@ public class App implements IPolynomialSolver {
 						string.append('x');
 						string.append('^');
 						string.append(c);
+						string.append('+');
 					}
 					else{
 					    string.append(tailC.value);	
