@@ -86,7 +86,7 @@ public class singleLinkedList implements ILinkedList {
 				j = j.next;
 			}
 			i.next = newNode;
-			newNode.next = j.next;
+			newNode.next = j;
 		}
 	}
 
