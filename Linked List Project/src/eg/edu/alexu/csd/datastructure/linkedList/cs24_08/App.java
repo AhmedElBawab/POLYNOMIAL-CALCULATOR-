@@ -20,12 +20,14 @@ public class App implements IPolynomialSolver {
 		
 		if(poly == 'A'){
 			
-			for(int i=0;i<terms[0].length;i++){
-				if(terms[0][i] == 0){
-					A.add(i, null);
-				}
-				else{
-					A.add(i, terms[0][i]);
+			for(int j=0;j<terms.length;j++){
+				for(int i=0;i<terms[0].length;i++){
+					if(terms[0][i] == 0){
+						A.add(i, 0);
+					}
+					else{
+						A.add(i, terms[0][i]);
+					}
 				}
 			}
 		}
@@ -33,7 +35,7 @@ public class App implements IPolynomialSolver {
 			
 			for(int i=0;i<terms[0].length;i++){
 				if(terms[0][i] == 0){
-					B.add(i, null);
+					B.add(i, 0);
 				}
 				else{
 				B.add(i, terms[0][i]);
@@ -43,7 +45,7 @@ public class App implements IPolynomialSolver {
 		if(poly == 'C'){
 			for(int i=0;i<terms[0].length;i++){
 				if(terms[0][i] == 0){
-					C.add(i, null);
+					C.add(i, 0);
 				}
 				else{
 				C.add(i, terms[0][i]);
@@ -78,7 +80,7 @@ public class App implements IPolynomialSolver {
 			}
 			else{
 				while (tailA.pre != null){
-					if(tailA.value != null){
+					if((Integer)tailA.value != 0){
 					if(c != 0){
 						string.append(tailA.value);
 						string.append('x');
@@ -106,7 +108,7 @@ public class App implements IPolynomialSolver {
 			}
 			else{
 				while (tailB.pre != null){
-					if(tailB.value != null){
+					if((Integer)tailB.value != 0){
 					if(c != 0){
 						string.append(tailB.value);
 						string.append('x');
@@ -134,7 +136,7 @@ public class App implements IPolynomialSolver {
 			}
 			else{
 				while (tailC.pre != null){
-					if(tailC.value != null){
+					if((Integer)tailC.value != 0){
 					if(c != 0){
 						string.append(tailC.value);
 						string.append('x');
@@ -162,7 +164,7 @@ public class App implements IPolynomialSolver {
 			}
 			else{
 				while (tailR.pre != null){
-					if(tailR.value != null){
+					if((Integer)tailR.value != 0){
 					if(c != 0){
 						string.append(tailR.value);
 						string.append('x');
