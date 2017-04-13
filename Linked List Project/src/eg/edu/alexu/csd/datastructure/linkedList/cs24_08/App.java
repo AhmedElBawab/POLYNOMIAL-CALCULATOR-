@@ -3,6 +3,8 @@ package eg.edu.alexu.csd.datastructure.linkedList.cs24_08;
 import eg.edu.alexu.csd.datastructure.linkedList.IPolynomialSolver;
 
 public class App implements IPolynomialSolver {
+	
+	RuntimeException e = new RuntimeException();
 
 	private DoubleLinkedList R = new DoubleLinkedList();
 
@@ -16,21 +18,18 @@ public class App implements IPolynomialSolver {
 	public void setPolynomial(char poly, int[][] terms) {
 		// TODO Auto-generated method stub
 
-		
-		
-
 		int noOfNodes = terms[0][1];
 
 		if (poly == 'A') {
-			doubleListNode i = A.head;// 
+			doubleListNode i = A.head;//
 			// set nodes without last node
 			for (int index = 0; index < noOfNodes; index++) {
-				A.add(index,0);
+				A.add(index, 0);
 				i = i.next;
 			}
 			int counter = 0;
 			A.add(terms[counter][0]);// set last node
-			i = i.next;
+		    //i = i.next;
 			counter++;
 			// set all nodes
 			for (int index = noOfNodes - 1; index >= 0; index--) {
@@ -41,16 +40,13 @@ public class App implements IPolynomialSolver {
 				} else {
 					i.pre.value = 0;
 					i = i.pre;
-}
+				}
 			}
-		}
-
-		
-		if (poly == 'B') {
+		}else if (poly == 'B') {
 			doubleListNode i = B.head;// refrence
 			// set nodes without last node
 			for (int index = 0; index < noOfNodes; index++) {
-				B.add(index,0);
+				B.add(index, 0);
 				i = i.next;
 			}
 			int counter = 0;
@@ -66,17 +62,13 @@ public class App implements IPolynomialSolver {
 				} else {
 					i.pre.value = 0;
 					i = i.pre;
+				}
 			}
-			}
-		}
-
-		
-
-		if (poly == 'C') {
+		}else if (poly == 'C') {
 			doubleListNode i = C.head;// refrence
 			// set nodes without last node
 			for (int index = 0; index < noOfNodes; index++) {
-				C.add(index,0);
+				C.add(index, 0);
 				i = i.next;
 			}
 			int counter = 0;
@@ -89,12 +81,13 @@ public class App implements IPolynomialSolver {
 					i.pre.value = terms[counter][0];
 					counter++;
 					i = i.pre;
-				}
-				else {
+				} else {
 					i.pre.value = 0;
 					i = i.pre;
+				}
 			}
-			}
+		}else{
+			throw e;
 		}
 	}
 
@@ -113,117 +106,107 @@ public class App implements IPolynomialSolver {
 		tailR = R.tail;
 		int c = 0;
 
-		if(poly == 'A'){
-			while (tailA.pre != null){
+		if (poly == 'A') {
+			while (tailA.pre != null) {
 				c++;
 				tailA = tailA.pre;
 			}
-			if(A.head == null){
+			if (A.head == null) {
 				return null;
-			}
-			else{
-				while (tailA.pre != null){
-					if((Integer)tailA.value != 0){
-					if(c != 0){
-						string.append(tailA.value);
-						string.append('x');
-						string.append('^');
-						string.append(c);
-						string.append('+');
-					}
-					else{
-					    string.append(tailA.value);	
-					}
+			} else {
+				while (tailA.pre != null) {
+					if ((Integer) tailA.value != 0) {
+						if (c != 0) {
+							string.append(tailA.value);
+							string.append('x');
+							string.append('^');
+							string.append(c);
+							string.append('+');
+						} else {
+							string.append(tailA.value);
+						}
 					}
 					c--;
 					tailA = tailA.pre;
 				}
 			}
-		}
-		if(poly == 'B'){
-			while (tailB.pre != null){
+		}else if (poly == 'B') {
+			while (tailB.pre != null) {
 				c++;
 				tailB = tailB.pre;
 			}
-			if(B.head == null){
+			if (B.head == null) {
 				return null;
-			}
-			else{
-				while (tailB.pre != null){
-					if((Integer)tailB.value != 0){
-					if(c != 0){
-						string.append(tailB.value);
-						string.append('x');
-						string.append('^');
-						string.append(c);
-						string.append('+');
-					}
-					else{
-					    string.append(tailB.value);	
-					}
+			} else {
+				while (tailB.pre != null) {
+					if ((Integer) tailB.value != 0) {
+						if (c != 0) {
+							string.append(tailB.value);
+							string.append('x');
+							string.append('^');
+							string.append(c);
+							string.append('+');
+						} else {
+							string.append(tailB.value);
+						}
 					}
 					c--;
 					tailB = tailB.pre;
 				}
 			}
-		}
-		if(poly == 'C'){
-			while (tailC.pre != null){
+		}else if (poly == 'C') {
+			while (tailC.pre != null) {
 				c++;
 				tailC = tailC.pre;
 			}
-			if(C.head == null){
+			if (C.head == null) {
 				return null;
-			}
-			else{
-				while (tailC.pre != null){
-					if((Integer)tailC.value != 0){
-					if(c != 0){
-						string.append(tailC.value);
-						string.append('x');
-						string.append('^');
-						string.append(c);
-						string.append('+');
-					}
-					else{
-					    string.append(tailC.value);	
-					}
+			} else {
+				while (tailC.pre != null) {
+					if ((Integer) tailC.value != 0) {
+						if (c != 0) {
+							string.append(tailC.value);
+							string.append('x');
+							string.append('^');
+							string.append(c);
+							string.append('+');
+						} else {
+							string.append(tailC.value);
+						}
 					}
 					c--;
 					tailC = tailC.pre;
 				}
 			}
-		}
-
-		if(poly == 'R'){
-			while (tailR.pre != null){
+		}if (poly == 'R') {
+			while (tailR.pre != null) {
 				c++;
 				tailR = tailR.pre;
 			}
-			if(R.head == null){
+			if (R.head == null) {
 				return null;
-			}
-			else{
-				while (tailR.pre != null){
-					if((Integer)tailR.value != 0){
-					if(c != 0){
-						string.append(tailR.value);
-						string.append('x');
-						string.append('^');
-						string.append(c);
-						string.append('+');
-					}
-					else{
-					    string.append(tailR.value);	
-					}
+			} else {
+				while (tailR.pre != null) {
+					if ((Integer) tailR.value != 0) {
+						if (c != 0) {
+							string.append(tailR.value);
+							string.append('x');
+							string.append('^');
+							string.append(c);
+							string.append('+');
+						} else {
+							string.append(tailR.value);
+						}
 					}
 					c--;
 					tailR = tailR.pre;
 				}
 			}
+		}else{
+			throw e;
 		}
 		return String.valueOf(string);
-		
+
 	}
 
 	@Override
@@ -240,9 +223,7 @@ public class App implements IPolynomialSolver {
 				A.head = j;
 				j = j.next;
 			}
-		}
-
-		if (poly == 'B') {
+		}else if (poly == 'B') {
 			doubleListNode j = B.head.next;
 			while (j != null) {
 				doubleListNode i = B.head;
@@ -252,9 +233,7 @@ public class App implements IPolynomialSolver {
 				B.head = j;
 				j = j.next;
 			}
-		}
-
-		if (poly == 'C') {
+		}else if (poly == 'C') {
 			doubleListNode j = C.head.next;
 			while (j != null) {
 				doubleListNode i = C.head;
@@ -264,9 +243,7 @@ public class App implements IPolynomialSolver {
 				C.head = j;
 				j = j.next;
 			}
-		}
-
-		if (poly == 'R') {
+		}else if (poly == 'R') {
 			doubleListNode j = R.head.next;
 			while (j != null) {
 				doubleListNode i = R.head;
@@ -276,8 +253,9 @@ public class App implements IPolynomialSolver {
 				R.head = j;
 				j = j.next;
 			}
+		}else{
+			throw e;
 		}
-
 	}
 
 	@Override
@@ -300,37 +278,29 @@ public class App implements IPolynomialSolver {
 				c++;
 				headA = headA.next;
 			}
-
-		}
-
-		if (poly == 'B') {
+		}else if (poly == 'B') {
 			while (headB.next != null) {
 				sum = sum + ((double) headB.value * (Math.pow(value, c)));
 				c++;
 				headB = headB.next;
 			}
-
-		}
-
-		if (poly == 'C') {
+		}else if (poly == 'C') {
 			while (headC.next != null) {
 				sum = sum + ((double) headC.value * (Math.pow(value, c)));
 				c++;
 				headC = headC.next;
 			}
-
-		}
-
-		if (poly == 'R') {
+		}else if (poly == 'R') {
 			while (headR.next != null) {
 				sum = sum + ((double) headR.value * (Math.pow(value, c)));
 				c++;
 				headR = headR.next;
 			}
-
+		}else{
+			throw e;
 		}
 
-		return (float)sum;
+		return (float) sum;
 	}
 
 	@Override
