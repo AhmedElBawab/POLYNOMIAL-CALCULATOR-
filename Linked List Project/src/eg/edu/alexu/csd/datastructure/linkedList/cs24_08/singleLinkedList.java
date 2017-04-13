@@ -9,6 +9,9 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public void add(int index, Object element) {
 		// TODO Auto-generated method stub
+		if (index < 0 || index > size() || element == null){
+			throw null;
+		}
 		SingleListNode newNode = new SingleListNode();// New node which will be
 														// insert in index
 		newNode.value = element;// set the value to new node
@@ -31,16 +34,24 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public void add(Object element) {
 		// TODO Auto-generated method stub
+		if (element == null){
+			throw null;
+		}
 		SingleListNode newNode = new SingleListNode();// new node
 		newNode.value = element;// set value to new node
-		SingleListNode i = this.head;// refrence
-		// search for the tail
-		while (i.next != null) {
-			i = i.next;
+		if(this.head==null){
+			newNode.next = this.head ;
+			this.head = newNode;
+		}else{
+			SingleListNode i = this.head;// refrence
+			// search for the tail
+			while (i.next != null) {
+				i = i.next;
+			}
+			// putting the new node
+			i.next = newNode;
+			newNode.next = null;
 		}
-		// putting the new node
-		i.next = newNode;
-		newNode.next = null;
 	}
 
 	@Override
