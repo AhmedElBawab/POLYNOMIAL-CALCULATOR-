@@ -39,7 +39,7 @@ public class singleLinkedList implements ILinkedList {
 		}
 		SingleListNode newNode = new SingleListNode();// new node
 		newNode.value = element;// set value to new node
-		if(this.head==null){
+		if(this.isEmpty()){
 			newNode.next = this.head ;
 			this.head = newNode;
 		}else{
@@ -57,37 +57,30 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public Object get(int index) {
 		// TODO Auto-generated method stub
+		if (index < 0 || index > size() - 1 || isEmpty()){
+			return null;
+		}
 		SingleListNode i = this.head;// refrence
 		int counter = 0;// counter for the index
-		while (i != null) {
-			if (counter == index) {
-				return i.value;
-			}
+		for (int counter1 = 0; counter1 < index; counter1++) {
 			i = i.next;
-			counter++;
 		}
-		return null;
+		return i.value;
 	}
 
 	@Override
 	public void set(int index, Object element) {
+		if (index < 0 || index > size()-1 || element == null){
+			throw null;
+		}
 		// TODO Auto-generated method stub
 		SingleListNode newNode = new SingleListNode();// new node
 		newNode.value = element;// set value to new node
 		SingleListNode i = this.head;// refrence for prev node
-		SingleListNode j = i.next;// refrence for node
-		if (index == 0) {
-			newNode.next = this.head.next;
-			this.head = newNode;
-		} else {
-			// search for prev node
-			for (int counter = 0; counter < index - 1; counter++) {
-				i = i.next;
-				j = j.next;
-			}
-			i.next = newNode;
-			newNode.next = j;
+		for (int counter = 0; counter < index; counter++) {
+			i = i.next;
 		}
+		i.value = element;
 	}
 
 	@Override
@@ -108,16 +101,18 @@ public class singleLinkedList implements ILinkedList {
 
 	@Override
 	public void remove(int index) {
+		if (index < 0 || index > size()-1 ){
+			throw null;
+		}
 		// TODO Auto-generated method stub
 		SingleListNode i = this.head;// refrence for prev node
-		SingleListNode j = i.next;// refrence for node
 		if (index == 0) {
 			this.head = this.head.next;
 		} else {
 			for (int counter = 0; counter < index - 1; counter++) {
 				i = i.next;
-				j = i.next;
 			}
+			SingleListNode j = i.next;// refrence for node
 			i.next = j.next;// remove node
 		}
 	}
@@ -125,29 +120,34 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		SingleListNode i = this.head; // refrence
-		int counter = 0;
-		while (i != null) {
-			i = i.next;
-			counter++;
+		if (isEmpty()){
+			return 0;
+		}else {
+			int counter = 1;
+			SingleListNode i = this.head;
+			while (i.next != null) {
+				i = i.next;
+				counter++;
+			}
+			return counter;
 		}
-		return counter;
 	}
 
 	@Override
 	public ILinkedList sublist(int fromIndex, int toIndex) {
+		if(fromIndex>toIndex || fromIndex<0 || toIndex>size() || isEmpty()){
+			return null;
+		}
 		// TODO Auto-generated method stub
 		ILinkedList subListObject = new singleLinkedList();
 		SingleListNode i = this.head ;
 		for(int counter = 0 ;counter<fromIndex ; counter++){
 			i = i.next ;
 		}
-		this.head = i ;
-		while(fromIndex<toIndex){
-			i = i.next ;
-			fromIndex++;
+		for (int counter = fromIndex; counter < toIndex + 1; counter++) {
+			subListObject.add(i.value);
+			i = i.next;
 		}
-		i.next = null ;
 		return subListObject ;
 		
 	}
@@ -155,14 +155,18 @@ public class singleLinkedList implements ILinkedList {
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
-		SingleListNode i = this.head;
-		while (i != null) {
-			if (i.value == o) {
-				return true;
+		if (isEmpty())
+			return false;
+		else {
+			SingleListNode i = this.head;
+			while (i != null) {
+				if (i.value == o) {
+					return true;
+				}
+				i = i.next;
 			}
-			i = i.next;
+			return false;
 		}
-		return false;
 	}
 
 }
