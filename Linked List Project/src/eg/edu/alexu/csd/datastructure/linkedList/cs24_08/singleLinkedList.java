@@ -126,15 +126,12 @@ public class singleLinkedList implements ILinkedList {
 	public int size() {
 		// TODO Auto-generated method stub
 		SingleListNode i = this.head; // refrence
-		int counter = 1;// counter for elements
+		int counter = 0;
 		while (i != null) {
 			i = i.next;
 			counter++;
-			if (i.next == null) {
-				return counter;
-			}
 		}
-		return 0;
+		return counter;
 	}
 
 	@Override
