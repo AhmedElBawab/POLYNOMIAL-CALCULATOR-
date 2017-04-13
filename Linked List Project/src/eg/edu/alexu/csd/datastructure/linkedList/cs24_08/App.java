@@ -17,8 +17,6 @@ public class App implements IPolynomialSolver {
 		// TODO Auto-generated method stub
 
 		
-		
-
 		int noOfNodes = terms[0][1];
 
 		if (poly == 'A') {
@@ -125,14 +123,17 @@ public class App implements IPolynomialSolver {
 				while (tailA.pre != null){
 					if((Integer)tailA.value != 0){
 					if(c != 0){
-						string.append(tailA.value);
+						string.append((Integer)tailA.value);
 						string.append('x');
 						string.append('^');
 						string.append(c);
+						if((Integer)tailA.next.value > 0){
 						string.append('+');
+						}
+						
 					}
 					else{
-					    string.append(tailA.value);	
+					    string.append((Integer)tailA.value);	
 					}
 					}
 					c--;
@@ -152,14 +153,16 @@ public class App implements IPolynomialSolver {
 				while (tailB.pre != null){
 					if((Integer)tailB.value != 0){
 					if(c != 0){
-						string.append(tailB.value);
+						string.append((Integer)tailB.value);
 						string.append('x');
 						string.append('^');
 						string.append(c);
-						string.append('+');
+						if((Integer)tailB.next.value > 0){
+							string.append('+');
+							}
 					}
 					else{
-					    string.append(tailB.value);	
+					    string.append((Integer)tailB.value);	
 					}
 					}
 					c--;
@@ -179,14 +182,16 @@ public class App implements IPolynomialSolver {
 				while (tailC.pre != null){
 					if((Integer)tailC.value != 0){
 					if(c != 0){
-						string.append(tailC.value);
+						string.append((Integer)tailC.value);
 						string.append('x');
 						string.append('^');
 						string.append(c);
-						string.append('+');
+						if((Integer)tailC.next.value > 0){
+							string.append('+');
+							}
 					}
 					else{
-					    string.append(tailC.value);	
+					    string.append((Integer)tailC.value);	
 					}
 					}
 					c--;
@@ -207,14 +212,16 @@ public class App implements IPolynomialSolver {
 				while (tailR.pre != null){
 					if((Integer)tailR.value != 0){
 					if(c != 0){
-						string.append(tailR.value);
+						string.append((Integer)tailR.value);
 						string.append('x');
 						string.append('^');
 						string.append(c);
-						string.append('+');
+						if((Integer)tailR.next.value > 0){
+							string.append('+');
+							}
 					}
 					else{
-					    string.append(tailR.value);	
+					    string.append((Integer)tailR.value);	
 					}
 					}
 					c--;
@@ -336,18 +343,374 @@ public class App implements IPolynomialSolver {
 	@Override
 	public int[][] add(char poly1, char poly2) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		doubleListNode headA = new doubleListNode();
+		doubleListNode headB = new doubleListNode();
+		doubleListNode headC = new doubleListNode();
+		doubleListNode headR = new doubleListNode();
+		headA = A.head;
+		headB = B.head;
+		headC = C.head;
+		headR = R.head;
+		int cA = 0,cB = 0,cC = 0,cR = 0;
+		if((poly1 == 'A' && poly2 == 'B')||(poly1 == 'B' && poly2 == 'A')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cA == cB){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)B.get(i)));
+				}
+			}
+			else if(cA > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)B.get(i)));
+				}
+				for(int j=cB+1;j<=cA;j++){
+					R.add(A.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)B.get(i)));
+				}
+				for(int j=cA+1;j<=cB;j++){
+					R.add(B.get(j));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'A' && poly2 == 'C')||(poly1 == 'C' && poly2 == 'A')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			if(cA == cC){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)C.get(i)));
+				}
+			}
+			else if(cA > cC){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)C.get(i)));
+				}
+				for(int j=cC+1;j<=cA;j++){
+					R.add(A.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)+(Integer)C.get(i)));
+				}
+				for(int j=cA+1;j<=cC;j++){
+					R.add(C.get(j));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'C' && poly2 == 'B')||(poly1 == 'B' && poly2 == 'C')){
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cC == cB){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)C.get(i)+(Integer)B.get(i)));
+				}
+			}
+			else if(cC > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)C.get(i)+(Integer)B.get(i)));
+				}
+				for(int j=cB+1;j<=cC;j++){
+					R.add(C.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)C.get(i)+(Integer)B.get(i)));
+				}
+				for(int j=cC+1;j<=cB;j++){
+					R.add(B.get(j));
+				}
+			}
+			
+		}
+		while(headR.next != null){
+			
+			cR++;
+			headR = headR.next;
+		}
+		int[][] r=new int[cR+1][2];
+		doubleListNode tailR = new doubleListNode();
+		tailR = R.tail;
+		int f = cR;
+		for(int i=0;i<=cR;i++){
+			r[i][0]=(Integer)tailR.value;
+			r[i][1]=f;
+			f--;
+			tailR = tailR.pre;
+		}
+		return r;
 	}
 
 	@Override
 	public int[][] subtract(char poly1, char poly2) {
 		// TODO Auto-generated method stub
-		return null;
+		doubleListNode headA = new doubleListNode();
+		doubleListNode headB = new doubleListNode();
+		doubleListNode headC = new doubleListNode();
+		doubleListNode headR = new doubleListNode();
+		headA = A.head;
+		headB = B.head;
+		headC = C.head;
+		headR = R.head;
+		int cA = 0,cB = 0,cC = 0,cR = 0;
+		if((poly1 == 'A' && poly2 == 'B')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cA == cB){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)B.get(i)));
+				}
+			}
+			else if(cA > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)B.get(i)));
+				}
+				for(int j=cB+1;j<=cA;j++){
+					R.add(A.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)B.get(i)));
+				}
+				for(int j=cA+1;j<=cB;j++){
+					R.add((Object)(0-(Integer)B.get(j)));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'B' && poly2 == 'A')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cA == cB){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)A.get(i)));
+				}
+			}
+			else if(cA > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)A.get(i)));
+				}
+				for(int j=cB+1;j<=cA;j++){
+					R.add((Object)(0-(Integer)A.get(j)));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)A.get(i)));
+				}
+				for(int j=cA+1;j<=cB;j++){
+					R.add(B.get(j));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'A' && poly2 == 'C')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			if(cA == cC){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)C.get(i)));
+				}
+			}
+			else if(cA > cC){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)C.get(i)));
+				}
+				for(int j=cC+1;j<=cA;j++){
+					R.add(A.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)A.get(i)-(Integer)C.get(i)));
+				}
+				for(int j=cA+1;j<=cC;j++){
+					R.add((Object)(0-(Integer)C.get(j)));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'C' && poly2 == 'A')){
+			while(headA.next != null){
+				cA++;
+				headA = headA.next;
+			}
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			if(cA == cC){
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)A.get(i)));
+				}
+			}
+			else if(cA > cC){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)A.get(i)));
+				}
+				for(int j=cC+1;j<=cA;j++){
+					R.add((Object)(0-(Integer)A.get(j)));
+				}
+			}
+			else{
+				for(int i=0;i<=cA;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)A.get(i)));
+				}
+				for(int j=cA+1;j<=cC;j++){
+					R.add(C.get(j));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'C' && poly2 == 'B')){
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cC == cB){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)B.get(i)));
+				}
+			}
+			else if(cC > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)B.get(i)));
+				}
+				for(int j=cB+1;j<=cC;j++){
+					R.add(C.get(j));
+				}
+			}
+			else{
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)C.get(i)-(Integer)B.get(i)));
+				}
+				for(int j=cC+1;j<=cB;j++){
+					R.add((Object)(0-(Integer)B.get(j)));
+				}
+			}
+			
+		}
+		
+		if((poly1 == 'B' && poly2 == 'C')){
+			while(headC.next != null){
+				cC++;
+				headC = headC.next;
+			}
+			while(headB.next != null){
+				cB++;
+				headB = headB.next;
+			}
+			if(cC == cB){
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)C.get(i)));
+				}
+			}
+			else if(cC > cB){
+				for(int i=0;i<=cB;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)C.get(i)));
+				}
+				for(int j=cB+1;j<=cC;j++){
+					R.add((Object)(0-(Integer)C.get(j)));
+				}
+			}
+			else{
+				for(int i=0;i<=cC;i++){
+					R.add(i,(Object)((Integer)B.get(i)-(Integer)C.get(i)));
+				}
+				for(int j=cC+1;j<=cB;j++){
+					R.add(B.get(j));
+				}
+			}
+			
+		}
+		
+     while(headR.next != null){
+			
+			cR++;
+			headR = headR.next;
+		}
+		int[][] r=new int[cR+1][2];
+		doubleListNode tailR = new doubleListNode();
+		tailR = R.tail;
+		int f = cR;
+		for(int i=0;i<=cR;i++){
+			r[i][0]=(Integer)tailR.value;
+			r[i][1]=f;
+			f--;
+			tailR = tailR.pre;
+		}
+		return r;
 	}
 
 	@Override
 	public int[][] multiply(char poly1, char poly2) {
 		// TODO Auto-generated method stub
+		doubleListNode headA = new doubleListNode();
+		doubleListNode headB = new doubleListNode();
+		doubleListNode headC = new doubleListNode();
+		doubleListNode headR = new doubleListNode();
+		headA = A.head;
+		headB = B.head;
+		headC = C.head;
+		headR = R.head;
+		
+		
+		
 		return null;
 	}
 
