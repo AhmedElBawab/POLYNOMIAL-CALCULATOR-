@@ -10,17 +10,17 @@ public class DoubleLinkedList implements ILinkedList {
 	public void add(int index, Object element) {
 		// TODO Auto-generated method stub
 
-		doubleListNode newNode = new doubleListNode();
-		if (index < 0 || index > size() || element == null){
+		if ((index < 0) || (index > size()) || (element == null)) {
 			throw null;
 		}
-		else{
-		
-		doubleListNode i = head;
+
+		doubleListNode newNode = new doubleListNode();
+		doubleListNode i = this.head;
 		newNode.value = element;
 		if (index == 0) {
 
-			head = newNode;
+			newNode.next = this.head;
+			this.head = newNode;
 		} else {
 			for (int j = 0; j < index - 1; j++) {
 				i = i.next;
@@ -31,8 +31,8 @@ public class DoubleLinkedList implements ILinkedList {
 					newNode.pre = tail;
 					tail = newNode;
 				} else {
-					head.next = newNode;
-					newNode.pre = head;
+					this.head.next = newNode;
+					newNode.pre = this.head;
 					tail = newNode;
 				}
 			} else {
@@ -40,70 +40,63 @@ public class DoubleLinkedList implements ILinkedList {
 				i.next.pre = newNode;
 				newNode.pre = i;
 				i.next = newNode;
-			 }
-		  }
+			}
 		}
 	}
 
 	@Override
 	public void add(Object element) {
 		// TODO Auto-generated method stub
-		if (element == null){
+		if (element == null) {
 			throw null;
 		}
-		else{
 
 		doubleListNode newNode = new doubleListNode();
 
 		newNode.value = element;
 
-		doubleListNode i= new doubleListNode();
-		i = head;
-		if(head == null){
-			head=newNode;
-		}
-		else{
-
-		while (i.next != null) {
-			i = i.next;
-		}
-
-		if (tail != null) {
-			tail = i;
-			tail.next = newNode;
-			newNode.pre = tail;
-			tail = newNode;
+		if (head == null) {
+			head = newNode;
 		} else {
-			tail = newNode;
-			head.next = newNode;
-			newNode.pre = head;
+			if (tail == null) {
+				head.next = newNode;
+				newNode.pre = head;
+
+				tail = newNode;
+			} else {
+
+				tail.next = newNode;
+
+				newNode.pre = tail;
+				tail = newNode;
+			}
 		}
-	}
-	}
+
 	}
 
 	@Override
 	public Object get(int index) {
 		// TODO Auto-generated method stub
+		if (index < 0 || index > size() - 1 || isEmpty()) {
+			return null;
+		}
 
-		doubleListNode i = new doubleListNode();
-		 i = head;
+		doubleListNode i = this.head;
 
-		 if (index < 0 || index > size()){
-			 return null;
-		 }else{
 		for (int j = 0; j < index; j++) {
 			i = i.next;
 		}
 
 		return i.value;
-		 }
 	}
 
 	@Override
 	public void set(int index, Object element) {
 		// TODO Auto-generated method stub
-		doubleListNode i = head;
+		if (index < 0 || index > size() - 1 || element == null) {
+			throw null;
+		}
+		doubleListNode i = this.head;
 
 		for (int j = 0; j < index; j++) {
 			i = i.next;
@@ -117,14 +110,12 @@ public class DoubleLinkedList implements ILinkedList {
 	public void clear() {
 		// TODO Auto-generated method stub
 
-		doubleListNode j = head.next;
-		while (j != null) {
-			doubleListNode i = head;
+		if (head.next == null) {
+			head = null;
+		} else {
+			head = null;
 
-			i.next = null;
-			j.pre = null;
-			head = j;
-			j = j.next;
+			tail = null;
 		}
 
 	}
@@ -132,7 +123,7 @@ public class DoubleLinkedList implements ILinkedList {
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		if (head.next == null) {
+		if (head == null) {
 			return true;
 		}
 		return false;
@@ -142,82 +133,97 @@ public class DoubleLinkedList implements ILinkedList {
 	public void remove(int index) {
 		// TODO Auto-generated method stub
 
-		doubleListNode i = new doubleListNode();
-		i = head;
-
-		for (int j = 0; j < index; j++) {
-			i = i.next;
+		if (index < 0 || index > size() - 1) {
+			throw null;
 		}
-		i.next.pre = i.pre;
-		i.pre.next = i.next;
+		doubleListNode i = this.head;
+		if (index == 0) {
+			this.head = this.head.next;
+		} else {
 
+			for (int j = 0; j < index - 1; j++) {
+				i = i.next;
+			}
+			if (i.next.next == null) {
+				i.next = null;
+				tail = i;
+			} else {
+				doubleListNode l = i.next.next;
+				i.next = l;
+				l.pre = i;
+			}
+		}
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
 
-		doubleListNode i = head;
-		int counter = 0;
-		while (i != null) {
-			i = i.next;
-			counter++;
+		if (isEmpty()) {
+			return 0;
+		} else {
+			int counter = 1;
+			doubleListNode i = this.head;
+			while (i.next != null) {
+				i = i.next;
+				counter++;
+			}
+			return counter;
 		}
-
-		return counter;
 	}
 
 	@Override
 	public ILinkedList sublist(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
 
-		doubleListNode i = head;
-		doubleListNode k = head;
+		if (fromIndex > toIndex || fromIndex < 0 || toIndex >= size() || isEmpty()) {
+			throw null;
+		} else {
+			// TODO Auto-generated method stub
+			ILinkedList d = new DoubleLinkedList();
+			doubleListNode i = this.head;
+			doubleListNode k = this.head;
 
-		ILinkedList d = new DoubleLinkedList();
-
-		for (int j = 0; j < fromIndex; j++) {
-			i = i.next;
+			for (int j = 0; j < fromIndex; j++) {
+				i = i.next;
+			}
+			for (int j = 0; j < toIndex; j++) {
+				k = k.next;
+			}
+			i.pre = null;
+			this.head = i;
+			k.next = null;
+			this.tail = k;
+			/*
+			 * doubleListNode l = new doubleListNode();
+			 * 
+			 * l = this.head; for (int j = 0; j < toIndex; j++) {
+			 * d.add(l.value); l = l.next; }
+			 */
+			return d;
 		}
-		for (int j = 0; j < toIndex; j++) {
-			k = k.next;
-		}
-
-		i.pre = null;
-
-		head = i;
-
-		k.next = null;
-
-		tail = k;
-		doubleListNode l = new doubleListNode();
-
-		l = head;
-		for (int j = 0; j < toIndex; j++) {
-			d.add(j, l.value);
-			l = l.next;
-		}
-		return d;
-
 	}
 
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
 
-		doubleListNode i = head;
+		if (isEmpty()) {
+			return false;
+		} else {
+			doubleListNode i = head;
 
-		while (i != null) {
-			if (i.value == o) {
+			while (i != null) {
+				if (i.value == o) {
 
-				return true;
+					return true;
 
+				}
+				i = i.next;
 			}
-			i = i.next;
+
+			return false;
+
 		}
-
-		return false;
-
 	}
 
 }

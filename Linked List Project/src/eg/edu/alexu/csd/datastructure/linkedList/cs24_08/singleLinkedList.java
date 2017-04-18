@@ -61,7 +61,6 @@ public class singleLinkedList implements ILinkedList {
 			return null;
 		}
 		SingleListNode i = this.head;// refrence
-		int counter = 0;// counter for the index
 		for (int counter1 = 0; counter1 < index; counter1++) {
 			i = i.next;
 		}
@@ -74,8 +73,6 @@ public class singleLinkedList implements ILinkedList {
 			throw null;
 		}
 		// TODO Auto-generated method stub
-		SingleListNode newNode = new SingleListNode();// new node
-		newNode.value = element;// set value to new node
 		SingleListNode i = this.head;// refrence for prev node
 		for (int counter = 0; counter < index; counter++) {
 			i = i.next;
@@ -135,10 +132,10 @@ public class singleLinkedList implements ILinkedList {
 
 	@Override
 	public ILinkedList sublist(int fromIndex, int toIndex) {
+		// TODO Auto-generated method stub
 		if(fromIndex>toIndex || fromIndex<0 || toIndex>size() || isEmpty()){
 			return null;
 		}
-		// TODO Auto-generated method stub
 		ILinkedList subListObject = new singleLinkedList();
 		SingleListNode i = this.head ;
 		for(int counter = 0 ;counter<fromIndex ; counter++){
